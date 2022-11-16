@@ -31,11 +31,11 @@ namespace SpellBoundAR.Conditions.Editor.Groups
             ConditionEquation equation = (ConditionEquation) target;
             SerializedObject serializedEquation = new SerializedObject(equation);
             
-            EditorGUILayout.BeginHorizontal(Container);
+            EditorGUILayout.BeginHorizontal(Styles.Container);
             
             EditorGUILayout.BeginHorizontal(GUILayout.MaxWidth(15));
             bool globalValid = equation && equation.Evaluate();
-            GUILayout.Label(globalValid ? "✓" : "✖", globalValid ? GreenBox : RedBox, GUILayout.ExpandHeight(true));
+            GUILayout.Label(globalValid ? "✓" : "✖", globalValid ? Styles.GreenBox : Styles.RedBox, GUILayout.ExpandHeight(true));
             EditorGUILayout.EndHorizontal();
             
             EditorGUILayout.BeginVertical();
@@ -51,7 +51,7 @@ namespace SpellBoundAR.Conditions.Editor.Groups
                 EditorGUILayout.BeginHorizontal(GUILayout.MaxWidth(15));
                 bool localEvaluation = condition && condition.Evaluate();
                 bool localValid = !not && localEvaluation || not && !localEvaluation;
-                GUILayout.Label(localValid ? "✓" : "✖", localValid ? GreenBox : RedBox, GUILayout.ExpandHeight(true));
+                GUILayout.Label(localValid ? "✓" : "✖", localValid ? Styles.GreenBox : Styles.RedBox, GUILayout.ExpandHeight(true));
                 EditorGUILayout.EndHorizontal();
                 
                 EditorGUILayout.BeginVertical();
