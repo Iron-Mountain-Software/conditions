@@ -1,44 +1,47 @@
-public static class ConditionEvaluation
+namespace SpellBoundAR.Conditions
 {
-    public static bool Compare(int test, int target, ConditionComparisonType comparison)
+    public static class ConditionEvaluation
     {
-        switch (comparison)
+        public static bool Compare(int test, int target, ConditionComparisonType comparison)
         {
-            case ConditionComparisonType.EqualTo:
-                return test == target;
-            case ConditionComparisonType.NotEqualTo:
-                return test != target;
-            case ConditionComparisonType.GreaterThan:
-                return test > target;
-            case ConditionComparisonType.GreaterThanOrEqualTo:
-                return test >= target;
-            case ConditionComparisonType.LessThan:
-                return test < target;
-            case ConditionComparisonType.LessThanOrEqualTo:
-                return test <= target;
-            default:
-                return false;
+            switch (comparison)
+            {
+                case ConditionComparisonType.EqualTo:
+                    return test == target;
+                case ConditionComparisonType.NotEqualTo:
+                    return test != target;
+                case ConditionComparisonType.GreaterThan:
+                    return test > target;
+                case ConditionComparisonType.GreaterThanOrEqualTo:
+                    return test >= target;
+                case ConditionComparisonType.LessThan:
+                    return test < target;
+                case ConditionComparisonType.LessThanOrEqualTo:
+                    return test <= target;
+                default:
+                    return false;
+            }
         }
-    }
         
-    public static bool Compare(float test, float target, ConditionComparisonType comparison)
-    {
-        switch (comparison)
+        public static bool Compare(float test, float target, ConditionComparisonType comparison)
         {
-            case ConditionComparisonType.EqualTo:
-                return test == target;
-            case ConditionComparisonType.NotEqualTo:
-                return test != target;
-            case ConditionComparisonType.GreaterThan:
-                return test > target;
-            case ConditionComparisonType.GreaterThanOrEqualTo:
-                return test >= target;
-            case ConditionComparisonType.LessThan:
-                return test < target;
-            case ConditionComparisonType.LessThanOrEqualTo:
-                return test <= target;
-            default:
-                return false;
+            switch (comparison)
+            {
+                case ConditionComparisonType.EqualTo:
+                    return test == target;
+                case ConditionComparisonType.NotEqualTo:
+                    return test != target;
+                case ConditionComparisonType.GreaterThan:
+                    return test > target;
+                case ConditionComparisonType.GreaterThanOrEqualTo:
+                    return test >= target;
+                case ConditionComparisonType.LessThan:
+                    return test < target;
+                case ConditionComparisonType.LessThanOrEqualTo:
+                    return test <= target;
+                default:
+                    return false;
+            }
         }
     }
 }

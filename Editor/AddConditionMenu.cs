@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Editor
+namespace SpellBoundAR.Conditions.Editor
 {
     public class AddConditionMenu
     {

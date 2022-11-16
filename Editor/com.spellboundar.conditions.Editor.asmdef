@@ -1,6 +1,6 @@
 {
     "name": "com.spellboundar.conditions.Editor",
-    "rootNamespace": "",
+    "rootNamespace": "SpellBoundAR.Conditions",
     "references": [
         "GUID:aa014cdb436c1461e8ac02d61d3d3867"
     ],

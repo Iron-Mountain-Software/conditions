@@ -1,7 +1,10 @@
 using System;
 
-public interface ICondition
+namespace SpellBoundAR.Conditions
 {
-    public event Action OnConditionStateChanged;
-    public bool Evaluate();
+    public interface ICondition
+    {
+        public event Action OnConditionStateChanged;
+        public bool Evaluate();
+    }
 }

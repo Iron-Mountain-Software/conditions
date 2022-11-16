@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Groups
+namespace SpellBoundAR.Conditions.Groups
 {
     [CreateAssetMenu(menuName = "Scriptable Objects/Core/Conditions/Groups/Equation")]
     public class ConditionEquation : Condition

@@ -1,9 +1,12 @@
-public enum ConditionComparisonType
+namespace SpellBoundAR.Conditions
 {
-    EqualTo = 0,
-    NotEqualTo = 1,
-    GreaterThan = 2,
-    GreaterThanOrEqualTo = 3,
-    LessThan = 4,
-    LessThanOrEqualTo = 5
+    public enum ConditionComparisonType
+    {
+        EqualTo = 0,
+        NotEqualTo = 1,
+        GreaterThan = 2,
+        GreaterThanOrEqualTo = 3,
+        LessThan = 4,
+        LessThanOrEqualTo = 5
+    }
 }

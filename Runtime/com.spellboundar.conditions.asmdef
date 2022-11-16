@@ -1,3 +1,14 @@
 {
-	"name": "com.spellboundar.conditions"
+    "name": "com.spellboundar.conditions",
+    "rootNamespace": "SpellBoundAR.Conditions",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

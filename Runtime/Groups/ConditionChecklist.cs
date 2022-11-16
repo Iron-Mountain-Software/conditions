@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Groups
+namespace SpellBoundAR.Conditions.Groups
 {
     [CreateAssetMenu(menuName = "Scriptable Objects/Core/Conditions/Groups/Checklist")]
     public class ConditionChecklist : Condition
