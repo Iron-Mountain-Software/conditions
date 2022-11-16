@@ -1,6 +1,6 @@
 {
   "name": "com.spellboundar.conditions",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "Conditions",
   "description": "Scriptable conditions for custom gameplay logic.",
   "unity": "2019.1",
