@@ -1,0 +1,21 @@
+{
+  "name": "com.spellboundar.conditions",
+  "version": "1.0.0",
+  "displayName": "Conditions",
+  "description": "Scriptable conditions for custom gameplay logic.",
+  "unity": "2019.1",
+  "keywords": [
+    "tools"
+  ],
+  "author": "Chris Monteferrante <chris@spellboundar.com>",
+  "type": "tool",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SpellBoundAR-Packages/conditions.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SpellBoundAR-Packages/conditions/issues"
+  },
+  "homepage": "https://github.com/SpellBoundAR-Packages/conditions#readme"
+}
