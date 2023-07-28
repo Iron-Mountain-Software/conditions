@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using SpellBoundAR.Conditions.Groups;
+using IronMountain.Conditions.Groups;
 using UnityEditor;
 using UnityEngine;
 
-namespace SpellBoundAR.Conditions.Editor.Groups
+namespace IronMountain.Conditions.Editor.Groups
 {
     [CustomEditor(typeof(ConditionChecklist), true)]
     public class ConditionChecklistInspector : ConditionInspector

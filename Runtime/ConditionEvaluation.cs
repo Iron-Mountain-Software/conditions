@@ -1,4 +1,4 @@
-namespace SpellBoundAR.Conditions
+namespace IronMountain.Conditions
 {
     public static class ConditionEvaluation
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SpellBoundAR.Conditions
+namespace IronMountain.Conditions
 {
     [CreateAssetMenu(menuName = "Scriptable Objects/Core/Conditions/Types/Always True")]
     public class ConditionTrue : Condition

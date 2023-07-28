@@ -1,12 +1,8 @@
 {
-    "name": "com.spellboundar.conditions.Editor",
-    "rootNamespace": "SpellBoundAR.Conditions",
-    "references": [
-        "GUID:aa014cdb436c1461e8ac02d61d3d3867"
-    ],
-    "includePlatforms": [
-        "Editor"
-    ],
+    "name": "com.iron-mountain.conditions",
+    "rootNamespace": "IronMountain.Conditions",
+    "references": [],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

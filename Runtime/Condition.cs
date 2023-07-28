@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace SpellBoundAR.Conditions
+namespace IronMountain.Conditions
 {
     public abstract class Condition : ScriptableObject, ICondition
     {

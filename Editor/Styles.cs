@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SpellBoundAR.Conditions.Editor
+namespace IronMountain.Conditions.Editor
 {
     public static class Styles
     {

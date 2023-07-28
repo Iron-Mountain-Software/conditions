@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace SpellBoundAR.Conditions.Editor
+namespace IronMountain.Conditions.Editor
 {
     public class AddConditionMenu
     {

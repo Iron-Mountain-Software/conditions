@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace SpellBoundAR.Conditions.Editor
+namespace IronMountain.Conditions.Editor
 {
     [CustomEditor(typeof(Condition), true)]
     public class ConditionInspector : UnityEditor.Editor

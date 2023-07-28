@@ -1,6 +1,6 @@
 using System;
 
-namespace SpellBoundAR.Conditions
+namespace IronMountain.Conditions
 {
     public interface ICondition
     {
