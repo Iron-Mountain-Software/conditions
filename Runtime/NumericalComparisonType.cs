@@ -1,6 +1,6 @@
 namespace IronMountain.Conditions
 {
-    public enum ConditionComparisonType
+    public enum NumericalComparisonType
     {
         EqualTo = 0,
         NotEqualTo = 1,
