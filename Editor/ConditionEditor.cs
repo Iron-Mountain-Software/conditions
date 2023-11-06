@@ -51,14 +51,14 @@ namespace IronMountain.Conditions.Editor
             
             EditorGUILayout.BeginHorizontal(_header,GUILayout.ExpandWidth(true));
             GUILayout.Label(_name, _h1, GUILayout.ExpandWidth(true));
-            if (condition && GUILayout.Button("Delete Condition", GUILayout.MaxWidth(150)))
+            if (condition && GUILayout.Button("Delete Condition", GUILayout.MaxWidth(125)))
             {
                 AssetDatabase.RemoveObjectFromAsset(condition);
                 Object.DestroyImmediate(condition);
                 condition = null;
                 AssetDatabase.SaveAssets();
             }
-            else if (!condition && GUILayout.Button("Add Condition", GUILayout.MaxWidth(150)))
+            else if (!condition && GUILayout.Button("Add Condition", GUILayout.MaxWidth(125)))
             {
                 AddConditionMenu.Open(_parent, "Condition", _onAdd);
             }
