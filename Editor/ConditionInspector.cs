@@ -36,6 +36,7 @@ namespace IronMountain.Conditions.Editor
                 Selection.activeObject = MonoScript.FromScriptableObject(_condition);
             }
             EditorGUILayout.EndHorizontal();
+            serializedObject.ApplyModifiedProperties();
         }
 
         protected virtual void DrawProperties()
