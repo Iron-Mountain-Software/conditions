@@ -10,25 +10,26 @@ namespace IronMountain.Conditions.Editor
 {
     public class AddConditionMenu
     {
-        public event Action<Condition> OnConditionCreated;
+        public static readonly List<Type> ConditionTypes;
 
-        private static void AddConditionToAsset(Object asset, Condition condition, string name)
+        static AddConditionMenu()
         {
-            if (!asset || !condition || string.IsNullOrEmpty(AssetDatabase.GetAssetPath(asset))) return;
-            AssetDatabase.AddObjectToAsset(condition, asset);
-            condition.name = name;
-            AssetDatabase.SaveAssets();
+            ConditionTypes = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(assembly => assembly.GetTypes())
+                .Where(type => type.IsSubclassOf(typeof(Condition)) && !type.IsAbstract)
+                .ToList();
         }
-        
-        public AddConditionMenu(Object asset, string name)
+
+        public static void Open(Object asset, string name, Action<Condition> onAdd)
         {
+            if (!asset) return;
             GenericMenu menu = new GenericMenu();
-            foreach (Type derivedType in GetDerivedTypes<Condition>())
+            foreach (Type derivedType in ConditionTypes)
             {
                 if (derivedType == null || string.IsNullOrWhiteSpace(derivedType.FullName)) continue;
                 
                 List<string> pathSegments = derivedType.FullName.Split('.').ToList();
-                pathSegments.RemoveAll(test => test is "ARISE" or "Condition" or "Conditions");
+                pathSegments.RemoveAll(test => test is "Condition" or "Conditions");
                 
                 string typeName = pathSegments[^1];
                 typeName = AddSpacesToSentence(typeName);
@@ -41,28 +42,18 @@ namespace IronMountain.Conditions.Editor
                     () =>
                     {
                         Condition condition = ScriptableObject.CreateInstance(derivedType) as Condition;
-                        AddConditionToAsset(asset, condition, name);
-                        OnConditionCreated?.Invoke(condition);
+                        if (!condition) return;
+                        condition.name = name;
+                        AssetDatabase.AddObjectToAsset(condition, asset);
+                        onAdd?.Invoke(condition);
+                        EditorUtility.SetDirty(asset);
+                        AssetDatabase.SaveAssets();
                     });
             }
             menu.ShowAsContext();
         }
-        
-        public static List<Type> GetDerivedTypes<T>()
-        {
-            List<Type> derivedTypes = new List<Type>();
-            
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                IEnumerable<Type> assemblyTypes = assembly.GetTypes()
-                    .Where(type => type.IsSubclassOf(typeof(T)) && !type.IsAbstract);
-                derivedTypes.AddRange(assemblyTypes);
-            }
-            
-            return derivedTypes;
-        }
-        
-        public static string AddSpacesToSentence(string text)
+
+        private static string AddSpacesToSentence(string text)
         {
             if (string.IsNullOrWhiteSpace(text))
                 return string.Empty;

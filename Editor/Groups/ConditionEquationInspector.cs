@@ -10,6 +10,14 @@ namespace IronMountain.Conditions.Editor.Groups
     {
         private readonly Dictionary<Condition, UnityEditor.Editor> _cachedEditors = new ();
         
+        private ConditionEquation _equation;
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            if (target) _equation = (ConditionEquation) target;
+        }
+        
         private void DrawButtons(SerializedProperty list, int i)
         {
             if (GUILayout.Button(MoveUpButtonContent, GUILayout.ExpandHeight(true), GUILayout.MaxWidth(20)))
@@ -18,7 +26,14 @@ namespace IronMountain.Conditions.Editor.Groups
             }            
             if (GUILayout.Button(DeleteButtonContent, GUILayout.ExpandHeight(true), GUILayout.MaxWidth(20)))
             { 
+                Condition condition = _equation.Conditions[i].condition;
+                if (condition)
+                {
+                    AssetDatabase.RemoveObjectFromAsset(condition);
+                    DestroyImmediate(condition);
+                }
                 list.DeleteArrayElementAtIndex(i);
+                AssetDatabase.SaveAssets();
             }            
             if (GUILayout.Button(MoveDownButtonContent, GUILayout.ExpandHeight(true), GUILayout.MaxWidth(20)))
             { 
@@ -28,39 +43,34 @@ namespace IronMountain.Conditions.Editor.Groups
         
         public override void OnInspectorGUI()
         {
-            ConditionEquation equation = (ConditionEquation) target;
-            SerializedObject serializedEquation = new SerializedObject(equation);
+            DrawTitle();
             
-            EditorGUILayout.BeginHorizontal(Styles.Container);
+            EditorGUILayout.BeginHorizontal();
             
-            EditorGUILayout.BeginHorizontal(GUILayout.MaxWidth(15));
-            bool globalValid = equation && equation.Evaluate();
-            GUILayout.Label(globalValid ? "✓" : "✖", globalValid ? Styles.GreenBox : Styles.RedBox, GUILayout.ExpandHeight(true));
-            EditorGUILayout.EndHorizontal();
+            bool globalValid = _equation && _equation.Evaluate();
+            GUILayout.Label(globalValid ? "✓" : "✖", globalValid ? Styles.GreenBox : Styles.RedBox, GUILayout.MaxWidth(15), GUILayout.ExpandHeight(true));
             
             EditorGUILayout.BeginVertical();
 
-            SerializedProperty list = serializedEquation.FindProperty("conditions");
+            SerializedProperty list = serializedObject.FindProperty("conditions");
             for (int i = 0; i < list.arraySize; i++)
             {
-                bool not = equation.Conditions[i].not;
-                Condition condition = equation.Conditions[i].condition;
+                bool not = _equation.Conditions[i].not;
+                Condition condition = _equation.Conditions[i].condition;
 
                 EditorGUILayout.BeginHorizontal();
                 
-                EditorGUILayout.BeginHorizontal(GUILayout.MaxWidth(15));
                 bool localEvaluation = condition && condition.Evaluate();
                 bool localValid = !not && localEvaluation || not && !localEvaluation;
-                GUILayout.Label(localValid ? "✓" : "✖", localValid ? Styles.GreenBox : Styles.RedBox, GUILayout.ExpandHeight(true));
-                EditorGUILayout.EndHorizontal();
+                GUILayout.Label(localValid ? "✓" : "✖", localValid ? Styles.GreenBox : Styles.RedBox, GUILayout.MaxWidth(15), GUILayout.ExpandHeight(true));
                 
                 EditorGUILayout.BeginVertical();
                 string operatorName = i > 0
-                    ? equation.Conditions[i].conditionalOperatorType + " "
+                    ? _equation.Conditions[i].conditionalOperatorType + " "
                     : string.Empty;
                 string conditionName = condition
-                    ? equation.Conditions[i].not ? condition.NegatedName : condition.DefaultName
-                    : equation.Conditions[i].not ? "NOT NULL" : "NULL";
+                    ? _equation.Conditions[i].not ? condition.NegatedName : condition.DefaultName
+                    : _equation.Conditions[i].not ? "NOT NULL" : "NULL";
                 string label = operatorName + conditionName;
                 EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i), new GUIContent(label));
                 if (list.GetArrayElementAtIndex(i).isExpanded && condition)
@@ -91,18 +101,22 @@ namespace IronMountain.Conditions.Editor.Groups
 
             EditorGUILayout.EndVertical();
             EditorGUILayout.EndHorizontal();
-            EditorGUILayout.Space();
 
-            if (GUILayout.Button(AddNewButtonContent))
+            serializedObject.ApplyModifiedProperties();
+        }
+        
+        private void DrawTitle()
+        {
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("Equation");
+            if (GUILayout.Button(AddNewButtonContent, GUILayout.MaxWidth(50)))
             {
-                AddConditionMenu addConditionMenu = new AddConditionMenu(target, "Condition");
-                addConditionMenu.OnConditionCreated += (condition) =>
+                AddConditionMenu.Open(target, "Condition", newCondition =>
                 {
-                    equation.Conditions.Add(new ConditionEquation.Entry { condition = condition });
-                };
+                    _equation.Conditions.Add(new ConditionEquation.Entry { condition = newCondition });
+                });
             }
-            
-            serializedEquation.ApplyModifiedProperties();
+            EditorGUILayout.EndHorizontal();
         }
     }
 }
