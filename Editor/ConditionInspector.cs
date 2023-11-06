@@ -28,8 +28,19 @@ namespace IronMountain.Conditions.Editor
                 valid ? Styles.GreenBox : Styles.RedBox,
                 GUILayout.MaxWidth(15),
                 GUILayout.ExpandHeight(true));
-            DrawDefaultInspector();
+            EditorGUILayout.BeginVertical();
+            DrawProperties();
+            EditorGUILayout.EndVertical();
+            if (GUILayout.Button(EditorGUIUtility.IconContent("cs Script Icon"), GUILayout.MaxWidth(25), GUILayout.Height(20)))
+            {
+                Selection.activeObject = MonoScript.FromScriptableObject(_condition);
+            }
             EditorGUILayout.EndHorizontal();
+        }
+
+        protected virtual void DrawProperties()
+        {
+            DrawDefaultInspector();
         }
     }
 }
