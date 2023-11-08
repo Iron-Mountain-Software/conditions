@@ -21,13 +21,13 @@ namespace IronMountain.Conditions.Editor
 
         public override void OnInspectorGUI()
         {
-            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.BeginHorizontal(GUILayout.ExpandHeight(false));
             bool valid = _condition && _condition.Evaluate();
             GUILayout.Label(
                 valid ? "✓" : "✖",
                 valid ? Styles.GreenBox : Styles.RedBox,
-                GUILayout.MaxWidth(15),
-                GUILayout.ExpandHeight(true));
+                GUILayout.Width(20),
+                GUILayout.Height(20));
             EditorGUILayout.BeginVertical();
             DrawProperties();
             EditorGUILayout.EndVertical();

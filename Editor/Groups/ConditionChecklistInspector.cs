@@ -21,11 +21,11 @@ namespace IronMountain.Conditions.Editor.Groups
 
         private void DrawButtons(SerializedProperty list, int i)
         {
-            if (GUILayout.Button(MoveUpButtonContent, GUILayout.ExpandHeight(true), GUILayout.MaxWidth(20)))
+            if (GUILayout.Button(MoveUpButtonContent, GUILayout.Width(20), GUILayout.Height(20)))
             {
                 list.MoveArrayElement(i, i - 1);
             }            
-            if (GUILayout.Button(DeleteButtonContent, GUILayout.ExpandHeight(true), GUILayout.MaxWidth(20)))
+            if (GUILayout.Button(DeleteButtonContent, GUILayout.Width(20), GUILayout.Height(20)))
             {
                 Condition condition = _checklist.Conditions[i].condition;
                 if (condition)
@@ -36,7 +36,7 @@ namespace IronMountain.Conditions.Editor.Groups
                 list.DeleteArrayElementAtIndex(i);
                 AssetDatabase.SaveAssets();
             }
-            if (GUILayout.Button(MoveDownButtonContent, GUILayout.ExpandHeight(true), GUILayout.MaxWidth(20)))
+            if (GUILayout.Button(MoveDownButtonContent, GUILayout.Width(20), GUILayout.Height(20)))
             {
                 list.MoveArrayElement(i, i + 1);
             }
@@ -76,7 +76,7 @@ namespace IronMountain.Conditions.Editor.Groups
             EditorGUILayout.BeginHorizontal();
             
             bool globalValid = _checklist && _checklist.Evaluate();
-            GUILayout.Label(globalValid ? "✓" : "✖", globalValid ? Styles.GreenBox : Styles.RedBox, GUILayout.MaxWidth(15), GUILayout.ExpandHeight(true));
+            GUILayout.Label(globalValid ? "✓" : "✖", globalValid ? Styles.GreenBox : Styles.RedBox, GUILayout.Width(20), GUILayout.Height(20));
             
             EditorGUILayout.BeginVertical();
             SerializedProperty list = serializedObject.FindProperty("conditions");
@@ -89,7 +89,7 @@ namespace IronMountain.Conditions.Editor.Groups
                 
                 bool localEvaluation = condition && condition.Evaluate();
                 bool localValid = !not && localEvaluation || not && !localEvaluation;
-                GUILayout.Label(localValid ? "✓" : "✖", localValid ? Styles.GreenBox : Styles.RedBox, GUILayout.MaxWidth(15), GUILayout.ExpandHeight(true));
+                GUILayout.Label(localValid ? "✓" : "✖", localValid ? Styles.GreenBox : Styles.RedBox, GUILayout.Width(20), GUILayout.Height(20));
                 
                 EditorGUILayout.BeginVertical();
                 string label = condition
