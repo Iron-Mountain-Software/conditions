@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace IronMountain.Conditions.Groups
 {
-    [CreateAssetMenu(menuName = "Scriptable Objects/Core/Conditions/Groups/Equation")]
+    [CreateAssetMenu(menuName = "Scriptable Objects/Conditions/Groups/Equation")]
     public class ConditionEquation : Condition
     {
         [Serializable]

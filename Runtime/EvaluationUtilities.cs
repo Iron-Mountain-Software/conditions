@@ -1,4 +1,3 @@
-using IronMountain.Conditions.Runtime;
 using UnityEngine;
 
 namespace IronMountain.Conditions
@@ -30,7 +29,7 @@ namespace IronMountain.Conditions
                     return false;
             }
         }
-        
+
         public static bool Compare(float test, float target, BooleanComparisonType comparison)
         {
             switch (comparison)

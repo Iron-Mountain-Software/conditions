@@ -1,7 +1,9 @@
 {
     "name": "com.iron-mountain.conditions",
     "rootNamespace": "IronMountain.Conditions",
-    "references": [],
+    "references": [
+        "GUID:9b5de69568e1049369185688465ca456"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace IronMountain.Conditions.Groups
 {
-    [CreateAssetMenu(menuName = "Scriptable Objects/Core/Conditions/Groups/Checklist")]
+    [CreateAssetMenu(menuName = "Scriptable Objects/Conditions/Groups/Checklist")]
     public class ConditionChecklist : Condition
     {
         [Serializable]

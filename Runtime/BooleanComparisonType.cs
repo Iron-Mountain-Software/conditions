@@ -1,4 +1,4 @@
-namespace IronMountain.Conditions.Runtime
+namespace IronMountain.Conditions
 {
     public enum BooleanComparisonType
     {

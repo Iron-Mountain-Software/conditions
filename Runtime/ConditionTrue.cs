@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace IronMountain.Conditions
 {
-    [CreateAssetMenu(menuName = "Scriptable Objects/Core/Conditions/Types/Always True")]
+    [CreateAssetMenu(menuName = "Scriptable Objects/Conditions/True", order = 0)]
     public class ConditionTrue : Condition
     {
         public override bool Evaluate() => true;
