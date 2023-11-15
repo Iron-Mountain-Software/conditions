@@ -59,9 +59,7 @@ namespace IronMountain.Conditions.Groups
             }
             return states.Any(test => test.Item2);
         }
-
-        public override string DefaultName => "Equation";
-        public override string NegatedName => "NOT Equation";
+        
         public override Sprite Depiction => conditions.Count > 0 && conditions[0].condition 
             ? conditions[0].condition.Depiction 
             : null;
@@ -77,6 +75,8 @@ namespace IronMountain.Conditions.Groups
             }
             return validCount < 1;
         }
+        
+        public override string ToString() => "Equation";
 
 #if UNITY_EDITOR
         

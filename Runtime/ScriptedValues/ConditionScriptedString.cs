@@ -22,12 +22,11 @@ namespace IronMountain.Conditions.ScriptedValues
         
         public override bool Evaluate() => scriptedString && EvaluationUtilities.Compare(scriptedString.Value, target, comparison);
 
-        public override string DefaultName => (scriptedString ? scriptedString.name : "NULL") 
-                                              + " is " + comparison + " " + target;
-        public override string NegatedName => (scriptedString ? scriptedString.name : "NULL") 
-                                              + " is NOT " + comparison + " " + target;
         public override Sprite Depiction => null;
         
         public override bool HasErrors() => !scriptedString;
+
+        public override string ToString() => (scriptedString ? scriptedString.name : "NULL") 
+                                             + " is " + comparison + " " + target;
     }
 }

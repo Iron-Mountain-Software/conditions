@@ -8,8 +8,6 @@ namespace IronMountain.Conditions
         public event Action OnConditionStateChanged;
         public abstract bool Evaluate();
 
-        public abstract string DefaultName { get; }
-        public abstract string NegatedName { get; }
         public abstract Sprite Depiction { get; }
 
         protected void FireOnConditionStateChanged()
@@ -25,7 +23,7 @@ namespace IronMountain.Conditions
         private void RefreshName()
         {
             string path = UnityEditor.AssetDatabase.GetAssetPath(this);
-            name = DefaultName;
+            name = ToString();
             UnityEditor.AssetDatabase.RenameAsset(path, name);
             UnityEditor.AssetDatabase.SaveAssets();
         }

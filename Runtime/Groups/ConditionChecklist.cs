@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace IronMountain.Conditions.Groups
 {
     [CreateAssetMenu(menuName = "Scriptable Objects/Conditions/Groups/Checklist")]
@@ -10,7 +14,6 @@ namespace IronMountain.Conditions.Groups
         [Serializable]
         public class Entry
         {
-            public bool not;
             public Condition condition;
         }
 
@@ -44,14 +47,11 @@ namespace IronMountain.Conditions.Groups
             foreach (Entry entry in conditions)
             {
                 if (entry == null || !entry.condition) continue;
-                bool value = entry.condition.Evaluate();
-                if ((entry.not && !value) || (!entry.not && value)) amountSatisfied++;
+                if (entry.condition.Evaluate()) amountSatisfied++;
             }
             return allRequired ? amountSatisfied == conditions.Count : amountSatisfied >= amountRequired;
         }
 
-        public override string DefaultName => "Checklist";
-        public override string NegatedName => "NOT Checklist";
 
         public override Sprite Depiction => conditions.Count > 0 && conditions[0].condition 
                 ? conditions[0].condition.Depiction 
@@ -68,6 +68,8 @@ namespace IronMountain.Conditions.Groups
             }
             return validCount < 1;
         }
+        
+        public override string ToString() => "Checklist";
 
 #if UNITY_EDITOR
 
@@ -76,6 +78,17 @@ namespace IronMountain.Conditions.Groups
             amountRequired = allRequired 
                 ? conditions.Count
                 : Mathf.Clamp(amountRequired, 0, conditions.Count);
+        }
+        
+        private void OnDestroy()
+        {
+            foreach (Entry entry in conditions)
+            {
+                if (entry == null || !entry.condition) continue;
+                AssetDatabase.RemoveObjectFromAsset(entry.condition);
+                DestroyImmediate(entry.condition);
+            }
+            AssetDatabase.SaveAssets();
         }
 
 #endif

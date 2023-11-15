@@ -22,12 +22,11 @@ namespace IronMountain.Conditions.ScriptedValues
 
         public override bool Evaluate() => scriptedFloat && EvaluationUtilities.Compare(scriptedFloat.Value, target, comparison);
 
-        public override string DefaultName => (scriptedFloat ? scriptedFloat.name : "NULL") 
-                                              + " is " + comparison + " " + target;
-        public override string NegatedName => (scriptedFloat ? scriptedFloat.name : "NULL") 
-                                              + " is NOT " + comparison + " " + target;
         public override Sprite Depiction => null;
         
         public override bool HasErrors() => !scriptedFloat;
+        
+        public override string ToString() => (scriptedFloat ? scriptedFloat.name : "NULL") 
+                                             + " is " + comparison + " " + target;
     }
 }

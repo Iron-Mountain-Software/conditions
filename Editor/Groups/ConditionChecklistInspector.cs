@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using IronMountain.Conditions.Groups;
 using UnityEditor;
@@ -53,6 +52,8 @@ namespace IronMountain.Conditions.Editor.Groups
         private void DrawTitle()
         {
             EditorGUILayout.BeginHorizontal();
+            bool globalValid = _checklist && _checklist.Evaluate();
+            GUILayout.Label(globalValid ? "✓" : "✖", globalValid ? Styles.GreenBox : Styles.RedBox, GUILayout.Width(20), GUILayout.Height(20));
             GUILayout.Label("Checklist");
             if (GUILayout.Button(AddNewButtonContent, GUILayout.MaxWidth(50)))
             {
@@ -65,66 +66,46 @@ namespace IronMountain.Conditions.Editor.Groups
             EditorGUILayout.EndHorizontal();
         }
 
-        private void DrawAmountRequired()
-        {
-            SerializedProperty allRequiredProperty = serializedObject.FindProperty("allRequired");
-            EditorGUILayout.PropertyField(allRequiredProperty);
-            if (!allRequiredProperty.boolValue) EditorGUILayout.PropertyField(serializedObject.FindProperty("amountRequired"));
-        }
-
         private void DrawList()
         {
-            EditorGUILayout.BeginHorizontal();
-            
-            bool globalValid = _checklist && _checklist.Evaluate();
-            GUILayout.Label(globalValid ? "✓" : "✖", globalValid ? Styles.GreenBox : Styles.RedBox, GUILayout.Width(20), GUILayout.Height(20));
-            
             EditorGUILayout.BeginVertical();
+            
             SerializedProperty list = serializedObject.FindProperty("conditions");
             for (int i = 0; i < list.arraySize; i++)
             {
-                bool not = _checklist.Conditions[i].not;
                 Condition condition = _checklist.Conditions[i].condition;
                 
                 EditorGUILayout.BeginHorizontal();
-                
-                bool localEvaluation = condition && condition.Evaluate();
-                bool localValid = !not && localEvaluation || not && !localEvaluation;
-                GUILayout.Label(localValid ? "✓" : "✖", localValid ? Styles.GreenBox : Styles.RedBox, GUILayout.Width(20), GUILayout.Height(20));
-                
+
+                EditorGUILayout.LabelField(i < list.arraySize - 1 ? " ┣━━" : " ┗━━", GUILayout.Width(20));
+
                 EditorGUILayout.BeginVertical();
-                string label = condition
-                    ? _checklist.Conditions[i].not ? condition.NegatedName :  condition.DefaultName
-                    : _checklist.Conditions[i].not ? "NOT NULL" : "NULL";
-                EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i), new GUIContent(label));
-                if (list.GetArrayElementAtIndex(i).isExpanded && condition)
+                if (condition)
                 {
                     UnityEditor.Editor cachedEditor = _cachedEditors.ContainsKey(condition)
                         ? _cachedEditors[condition] : null;
                     CreateCachedEditor(condition, null, ref cachedEditor);
                     cachedEditor.OnInspectorGUI();
-                    if (!_cachedEditors.ContainsKey(condition)) _cachedEditors.Add(condition, cachedEditor);
+                    if (!_cachedEditors.ContainsKey(condition))  _cachedEditors.Add(condition, cachedEditor);
                 }
+                else EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("condition"), GUIContent.none);
                 EditorGUILayout.EndVertical();
 
-                if (list.GetArrayElementAtIndex(i).isExpanded)
-                {
-                    EditorGUILayout.BeginVertical(GUILayout.MaxWidth(30));
-                    DrawButtons(list, i);
-                    EditorGUILayout.EndVertical();
-                }
-                else
-                {
-                    EditorGUILayout.BeginHorizontal(GUILayout.MaxWidth(30));
-                    DrawButtons(list, i);
-                    EditorGUILayout.EndHorizontal();
-                }
+                EditorGUILayout.BeginHorizontal(GUILayout.MaxWidth(30));
+                DrawButtons(list, i);
+                EditorGUILayout.EndHorizontal();
 
                 EditorGUILayout.EndHorizontal();
             }
             
             EditorGUILayout.EndVertical();
-            EditorGUILayout.EndHorizontal();
+        }
+        
+        private void DrawAmountRequired()
+        {
+            SerializedProperty allRequiredProperty = serializedObject.FindProperty("allRequired");
+            EditorGUILayout.PropertyField(allRequiredProperty);
+            if (!allRequiredProperty.boolValue) EditorGUILayout.PropertyField(serializedObject.FindProperty("amountRequired"));
         }
     }
 }

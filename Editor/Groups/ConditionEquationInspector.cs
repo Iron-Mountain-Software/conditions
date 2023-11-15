@@ -76,6 +76,8 @@ namespace IronMountain.Conditions.Editor.Groups
 
                 EditorGUILayout.BeginHorizontal();
                 
+                EditorGUILayout.LabelField(i < list.arraySize - 1 ? " ┣━━" : " ┗━━", GUILayout.Width(20));
+
                 if (i > 0)
                 {
                     EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("conditionalOperatorType"), GUIContent.none, GUILayout.Width(55));

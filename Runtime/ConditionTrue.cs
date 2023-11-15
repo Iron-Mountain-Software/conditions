@@ -6,9 +6,8 @@ namespace IronMountain.Conditions
     public class ConditionTrue : Condition
     {
         public override bool Evaluate() => true;
-        public override string DefaultName => "True";
-        public override string NegatedName => "NOT True";
         public override Sprite Depiction => null;
         public override bool HasErrors() => false;
+        public override string ToString() => "True";
     }
 }

@@ -21,13 +21,12 @@ namespace IronMountain.Conditions.ScriptedValues
         }
         
         public override bool Evaluate() => scriptedInt && EvaluationUtilities.Compare(scriptedInt.Value, target, comparison);
-
-        public override string DefaultName => (scriptedInt ? scriptedInt.name : "NULL") 
-                                              + " is " + comparison + " " + target;
-        public override string NegatedName => (scriptedInt ? scriptedInt.name : "NULL") 
-                                              + " is NOT " + comparison + " " + target;
+        
         public override Sprite Depiction => null;
         
         public override bool HasErrors() => !scriptedInt;
+        
+        public override string ToString() => (scriptedInt ? scriptedInt.name : "NULL") 
+                                             + " is " + comparison + " " + target;
     }
 }
