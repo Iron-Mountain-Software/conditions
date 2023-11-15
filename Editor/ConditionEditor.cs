@@ -60,7 +60,7 @@ namespace IronMountain.Conditions.Editor
             }
             else if (!condition && GUILayout.Button("Add Condition", GUILayout.MaxWidth(125)))
             {
-                AddConditionMenu.Open(_parent, "Condition", _onAdd);
+                AddConditionMenu.Open(_parent, _onAdd);
             }
             EditorGUILayout.EndHorizontal();
             

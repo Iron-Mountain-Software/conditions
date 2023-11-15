@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace IronMountain.Conditions.Groups
 {
     [CreateAssetMenu(menuName = "Scriptable Objects/Conditions/Groups/Equation")]
@@ -12,7 +16,6 @@ namespace IronMountain.Conditions.Groups
         public class Entry
         {
             public ConditionalOperatorType conditionalOperatorType;
-            public bool not;
             public Condition condition;
         }
 
@@ -44,9 +47,7 @@ namespace IronMountain.Conditions.Groups
                 if (!entry.condition) return false;
                 states.Add(new Tuple<ConditionalOperatorType, bool>(
                     entry.conditionalOperatorType, 
-                    entry.not
-                        ? !entry.condition.Evaluate() 
-                        : entry.condition.Evaluate()));
+                    entry.condition.Evaluate()));
             }
             for (int i = states.Count - 1; i > 0; i--)
             {
@@ -87,6 +88,17 @@ namespace IronMountain.Conditions.Groups
                 if (conditions[i].conditionalOperatorType == ConditionalOperatorType.NONE)
                     conditions[i].conditionalOperatorType = ConditionalOperatorType.AND;
             }
+        }
+        
+        private void OnDestroy()
+        {
+            foreach (Entry entry in conditions)
+            {
+                if (entry == null || !entry.condition) continue;
+                AssetDatabase.RemoveObjectFromAsset(entry.condition);
+                DestroyImmediate(entry.condition);
+            }
+            AssetDatabase.SaveAssets();
         }
         
 #endif

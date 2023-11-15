@@ -56,9 +56,10 @@ namespace IronMountain.Conditions.Editor.Groups
             GUILayout.Label("Checklist");
             if (GUILayout.Button(AddNewButtonContent, GUILayout.MaxWidth(50)))
             {
-                AddConditionMenu.Open(target, "Condition", newCondition =>
+                AddConditionMenu.Open(target, newCondition =>
                 {
                     _checklist.Conditions.Add(new ConditionChecklist.Entry { condition = newCondition });
+                    serializedObject.Update();
                 });
             }
             EditorGUILayout.EndHorizontal();

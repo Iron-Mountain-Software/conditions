@@ -20,7 +20,7 @@ namespace IronMountain.Conditions.Editor
                 .ToList();
         }
 
-        public static void Open(Object asset, string name, Action<Condition> onAdd)
+        public static void Open(Object asset, Action<Condition> onAdd)
         {
             if (!asset) return;
             GenericMenu menu = new GenericMenu();
@@ -43,7 +43,7 @@ namespace IronMountain.Conditions.Editor
                     {
                         Condition condition = ScriptableObject.CreateInstance(derivedType) as Condition;
                         if (!condition) return;
-                        condition.name = name;
+                        condition.name = "New " + typeName;
                         AssetDatabase.AddObjectToAsset(condition, asset);
                         onAdd?.Invoke(condition);
                         EditorUtility.SetDirty(asset);
