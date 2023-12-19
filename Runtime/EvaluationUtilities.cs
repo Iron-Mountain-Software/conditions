@@ -110,5 +110,18 @@ namespace IronMountain.Conditions
                     return false;
             }
         }
+        
+        public static bool Compare<T>(T test, NullComparisonType comparison)
+        {
+            switch (comparison)
+            {
+                case NullComparisonType.IsNull:
+                    return test == null;
+                case NullComparisonType.IsNotNull:
+                    return test != null;
+                default:
+                    return false;
+            }
+        }
     }
 }
