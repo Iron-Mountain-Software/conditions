@@ -80,9 +80,9 @@ namespace IronMountain.Conditions.Editor.Groups
 
                 if (i > 0)
                 {
-                    EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("conditionalOperatorType"), GUIContent.none, GUILayout.Width(55));
+                    EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("conditionalOperatorType"), GUIContent.none, GUILayout.Width(48));
                 }
-                else EditorGUILayout.LabelField(string.Empty, GUILayout.Width(55));
+                else EditorGUILayout.LabelField(string.Empty, GUILayout.Width(48));
                 
                 EditorGUILayout.BeginVertical();
                 if (condition)
