@@ -51,7 +51,7 @@ namespace IronMountain.Conditions.Groups
             }
             for (int i = states.Count - 1; i > 0; i--)
             {
-                if (states[i].Item1 == ConditionalOperatorType.OR) continue;
+                if (states[i].Item1 == ConditionalOperatorType.Or) continue;
                 states[i - 1] = new Tuple<ConditionalOperatorType, bool>(
                     states[i - 1].Item1,
                     states[i - 1].Item2 && states[i].Item2);
@@ -82,11 +82,11 @@ namespace IronMountain.Conditions.Groups
         
         private void OnValidate()
         {
-            if (conditions.Count > 0) conditions[0].conditionalOperatorType = ConditionalOperatorType.NONE;
+            if (conditions.Count > 0) conditions[0].conditionalOperatorType = ConditionalOperatorType.None;
             for (int i = 1; i < conditions.Count; i++)
             {
-                if (conditions[i].conditionalOperatorType == ConditionalOperatorType.NONE)
-                    conditions[i].conditionalOperatorType = ConditionalOperatorType.AND;
+                if (conditions[i].conditionalOperatorType == ConditionalOperatorType.None)
+                    conditions[i].conditionalOperatorType = ConditionalOperatorType.And;
             }
         }
         

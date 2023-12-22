@@ -1,5 +1,5 @@
 # Scriptable Conditions
-*Version: 1.5.1*
+*Version: 1.5.2*
 ## Description: 
 Scriptable-object conditions that make it easy to reuse gameplay logic.
 ## Dependencies: 
