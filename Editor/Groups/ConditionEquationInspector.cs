@@ -32,7 +32,7 @@ namespace IronMountain.Conditions.Editor.Groups
                     AssetDatabase.RemoveObjectFromAsset(condition);
                     DestroyImmediate(condition);
                 }
-                list.DeleteArrayElementAtIndex(i);
+                else list.DeleteArrayElementAtIndex(i);
                 AssetDatabase.SaveAssets();
             }            
             if (GUILayout.Button(MoveDownButtonContent, GUILayout.Width(20), GUILayout.Height(20)))
@@ -70,7 +70,7 @@ namespace IronMountain.Conditions.Editor.Groups
             EditorGUILayout.BeginVertical();
             
             SerializedProperty list = serializedObject.FindProperty("conditions");
-            for (int i = 0; i < list.arraySize; i++)
+            for (int i = 0; i < serializedObject.FindProperty("conditions").arraySize; i++)
             {
                 Condition condition = _equation.Conditions[i].condition;
 

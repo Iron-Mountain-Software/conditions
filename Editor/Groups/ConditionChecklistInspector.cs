@@ -32,7 +32,7 @@ namespace IronMountain.Conditions.Editor.Groups
                     AssetDatabase.RemoveObjectFromAsset(condition);
                     DestroyImmediate(condition);
                 }
-                list.DeleteArrayElementAtIndex(i);
+                else list.DeleteArrayElementAtIndex(i);
                 AssetDatabase.SaveAssets();
             }
             if (GUILayout.Button(MoveDownButtonContent, GUILayout.Width(20), GUILayout.Height(20)))
