@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 
 namespace IronMountain.Conditions.Editor
 {
-    public class AddConditionMenu
+    public static class AddConditionMenu
     {
         public static readonly List<Type> ConditionTypes;
 
@@ -56,7 +56,7 @@ namespace IronMountain.Conditions.Editor
             foreach (string key in entries.Keys)
             {
                 if (key == string.Empty) continue;
-                menu.AddSeparator(key);
+                menu.AddSeparator(AddSpacesToSentence(key));
                 foreach (var derivedType in entries[key])
                 {
                     AddType(menu, derivedType, asset, onAdd);
