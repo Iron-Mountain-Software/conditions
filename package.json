@@ -1,6 +1,6 @@
 {
   "name": "com.iron-mountain.conditions",
-  "version": "1.5.8",
+  "version": "1.5.9",
   "displayName": "Scriptable Conditions",
   "author": "Chris Monteferrante <chris@spellboundar.com>",
   "unity": "2019.1",
@@ -15,13 +15,32 @@
     "type": "git",
     "url": "git+https://github.com/Iron-Mountain-Software/conditions.git"
   },
-  "description": "Scriptable-object conditions that make it easy to reuse gameplay logic.",
-  "useCases": [],
+  "description": "Scriptable-object conditions that make it easy to reuse gameplay logic.\n\nSOME CODING REQUIRED\n\nWhen implementing abstract systems that require conditional logic (i.e. quests, dialogue, story events), it is helpful to separate conditional logic from the systems themselves. For example, each of my Dialogue Interaction objects references a Condition that determines if the interaction should play or not.\n\nThis separation of responsibilities makes it easy to reuse conditional logic and conditional objects across multiple systems.",
+  "useCases": [
+    "Abstract systems that require conditional logic.",
+    "Determining what dialogue to play.",
+    "Determining when quests or missions should activate.",
+    "Determining when quest/mission requirements have been satisfied. ",
+    "Anytime anything needs to be decided ¯\\_(ツ)_/¯ "
+  ],
   "directions": "",
   "keywords": [
     "tools"
   ],
-  "sources": [],
+  "sources": [
+    {
+      "type": "git",
+      "url": "https://github.com/Iron-Mountain-Software/conditions.git"
+    },
+    {
+      "type": "itch.io",
+      "url": "https://iron-mountain.itch.io/scripted-conditions"
+    },
+    {
+      "type": "npm",
+      "url": "https://www.npmjs.com/package/com.iron-mountain.conditions"
+    }
+  ],
   "dependencies": {
     "com.iron-mountain.save-system": "1.0.4"
   }
